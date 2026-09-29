@@ -97,92 +97,92 @@
 			/* Initial page load animations - 3s */
 			@keyframes initial-load-180 {
 				0% {
-					transform: rotate(0deg) scaleX(0);
+					transform: rotate(0deg) scale(0);
 				}
 				23.33% {
-					transform: rotate(0deg) scaleX(1);
+					transform: rotate(0deg) scale(1);
 				}
 				100% {
-					transform: rotate(180deg) scaleX(1);
+					transform: rotate(180deg) scale(1);
 				}
 			}
 
 			@keyframes initial-load-420 {
 				0% {
-					transform: rotate(0deg) scaleX(0);
+					transform: rotate(0deg) scale(0);
 				}
 				23.33% {
-					transform: rotate(0deg) scaleX(1);
+					transform: rotate(0deg) scale(1);
 				}
 				100% {
-					transform: rotate(420deg) scaleX(1);
+					transform: rotate(420deg) scale(1);
 				}
 			}
 
 			@keyframes initial-load-660 {
 				0% {
-					transform: rotate(0deg) scaleX(0);
+					transform: rotate(0deg) scale(0);
 				}
 				23.33% {
-					transform: rotate(0deg) scaleX(1);
+					transform: rotate(0deg) scale(1);
 				}
 				100% {
-					transform: rotate(660deg) scaleX(1);
+					transform: rotate(660deg) scale(1);
 				}
 			}
 
 			/* Hover loop animations - 3.6s active cycle */
 			@keyframes hover-loop-180 {
 				0% {
-					transform: rotate(180deg) scaleX(1);
+					transform: rotate(180deg) scale(1);
 				}
 				19.444% {
-					transform: rotate(180deg) scaleX(0);
+					transform: rotate(180deg) scale(0);
 				}
 				20% {
-					transform: rotate(0deg) scaleX(0);
+					transform: rotate(0deg) scale(0);
 				}
 				39.444% {
-					transform: rotate(0deg) scaleX(1);
+					transform: rotate(0deg) scale(1);
 				}
 				100% {
-					transform: rotate(180deg) scaleX(1);
+					transform: rotate(180deg) scale(1);
 				}
 			}
 
 			@keyframes hover-loop-420 {
 				0% {
-					transform: rotate(420deg) scaleX(1);
+					transform: rotate(420deg) scale(1);
 				}
 				19.444% {
-					transform: rotate(420deg) scaleX(0);
+					transform: rotate(420deg) scale(0);
 				}
 				20% {
-					transform: rotate(0deg) scaleX(0);
+					transform: rotate(0deg) scale(0);
 				}
 				39.444% {
-					transform: rotate(0deg) scaleX(1);
+					transform: rotate(0deg) scale(1);
 				}
 				100% {
-					transform: rotate(420deg) scaleX(1);
+					transform: rotate(420deg) scale(1);
 				}
 			}
 
 			@keyframes hover-loop-660 {
 				0% {
-					transform: rotate(660deg) scaleX(1);
+					transform: rotate(660deg) scale(1);
 				}
 				19.444% {
-					transform: rotate(660deg) scaleX(0);
+					transform: rotate(660deg) scale(0);
 				}
 				20% {
-					transform: rotate(0deg) scaleX(0);
+					transform: rotate(0deg) scale(0);
 				}
 				39.444% {
-					transform: rotate(0deg) scaleX(1);
+					transform: rotate(0deg) scale(1);
 				}
 				100% {
-					transform: rotate(660deg) scaleX(1);
+					transform: rotate(660deg) scale(1);
 				}
 			}
 
@@ -204,19 +204,19 @@
 			/* Static logo state after initial load completes */
 			.spinner-line1.complete:not(.animating) {
 				animation: none;
-				transform: rotate(180deg) scaleX(1);
+				transform: rotate(180deg) scale(1);
 				transform-origin: 150px 150px;
 			}
 
 			.spinner-line2.complete:not(.animating) {
 				animation: none;
-				transform: rotate(420deg) scaleX(1);
+				transform: rotate(420deg) scale(1);
 				transform-origin: 150px 150px;
 			}
 
 			.spinner-line3.complete:not(.animating) {
 				animation: none;
-				transform: rotate(660deg) scaleX(1);
+				transform: rotate(660deg) scale(1);
 				transform-origin: 150px 150px;
 			}
 
@@ -237,7 +237,47 @@
 			}
 		</style>
 	</defs>
-	<!-- Line 3 (Purple) - bottom layer -->
+	<!-- Left leg (Blue) - shares the line1 animation with the right leg -->
+	<g class="spinner-line1" class:complete={initialLoadComplete} class:animating={isAnimating}>
+		<line
+			x1="260"
+			y1="230"
+			x2="260"
+			y2="70"
+			stroke="rgb(98, 98, 238)"
+			stroke-width="19.84"
+			stroke-linecap="round"
+		/>
+	</g>
+	<!-- Right leg (Blue) -->
+	<g class="spinner-line1" class:complete={initialLoadComplete} class:animating={isAnimating}>
+		<line
+			x1="40"
+			y1="230"
+			x2="40"
+			y2="70"
+			stroke="rgb(98, 98, 238)"
+			stroke-width="19.84"
+			stroke-linecap="round"
+		/>
+	</g>
+	<!-- Left diagonal (Cyan) - middle layer. Coords are pre-rotation: the
+	complete state rotates this group +60deg into position (top of left leg
+	down to the center vertex) -->
+	<g class="spinner-line2" class:complete={initialLoadComplete} class:animating={isAnimating}>
+		<line
+			x1="25.7"
+			y1="205.3"
+			x2="180.3"
+			y2="167.5"
+			stroke="rgb(38, 187, 217)"
+			stroke-width="19.84"
+			stroke-linecap="round"
+		/>
+	</g>
+	<!-- Right diagonal (Purple) - top layer, carries the animation end event.
+	Pre-rotation coords: complete state rotates -60deg into position (center
+	vertex up to the top of the right leg) -->
 	<g
 		class="spinner-line3"
 		class:complete={initialLoadComplete}
@@ -245,35 +285,11 @@
 		onanimationend={handleAnimationEnd}
 	>
 		<line
-			x1="27.92"
-			y1="150"
-			x2="272.66"
-			y2="150"
+			x1="119.7"
+			y1="167.5"
+			x2="274.3"
+			y2="205.3"
 			stroke="rgb(189, 99, 238)"
-			stroke-width="19.84"
-			stroke-linecap="round"
-		/>
-	</g>
-	<!-- Line 2 (Blue) - middle layer -->
-	<g class="spinner-line2" class:complete={initialLoadComplete} class:animating={isAnimating}>
-		<line
-			x1="27.92"
-			y1="150"
-			x2="272.66"
-			y2="150"
-			stroke="rgb(98, 98, 238)"
-			stroke-width="19.84"
-			stroke-linecap="round"
-		/>
-	</g>
-	<!-- Line 1 (Cyan/Teal) - top layer -->
-	<g class="spinner-line1" class:complete={initialLoadComplete} class:animating={isAnimating}>
-		<line
-			x1="27.92"
-			y1="150"
-			x2="272.66"
-			y2="150"
-			stroke="rgb(38, 187, 217)"
 			stroke-width="19.84"
 			stroke-linecap="round"
 		/>

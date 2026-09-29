@@ -1,8 +1,10 @@
+import { site } from '$lib/js/site.js';
+
 export function load() {
 	return {
 		meta: {
-			title: 'refact0r',
-			description: 'my website/portfolio/blog.'
+			title: site.name,
+			description: site.description
 		}
 	};
 }

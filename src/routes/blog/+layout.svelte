@@ -1,4 +1,6 @@
 <script>
+	import { site } from '$lib/js/site.js';
+
 	let { children } = $props();
 </script>
 
@@ -6,7 +8,7 @@
 	<link
 		rel="alternate"
 		type="application/rss+xml"
-		title="refact0r.dev - blog rss feed"
+		title="{site.domain} - blog rss feed"
 		href="/blog/rss.xml"
 	/>
 </svelte:head>

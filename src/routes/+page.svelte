@@ -14,12 +14,13 @@
 	<AsciiField {burst} />
 	<div class="container">
 		<div class="row">
-			<h1>refact0r</h1>
+			<h1>munene</h1>
 			<div class="logo">
 				<LogoAnimated onAnimationComplete={handleLogoAnimationComplete} />
 			</div>
 		</div>
-		<p>hey there! i'm yifan. i care about how software works, learns, and feels.</p>
+		<p>hey there! i'm munene.</p>
+		<p class="sub">i build things for the web and i care about how they feel to use.</p>
 		<nav>
 			<a class="nav" href="/about">
 				<span class="arrow">-></span><span class="slash">/</span>about
@@ -31,7 +32,7 @@
 				<span class="arrow">-></span><span class="slash">/</span>blog
 			</a>
 			<a class="nav" href="/photos">
-				<span class="arrow">-></span><span class="slash">/</span>photos
+				<span class="arrow">-></span><span class="slash">/</span>journey
 			</a>
 			<a class="nav" href="/inspo">
 				<span class="arrow">-></span><span class="slash">/</span>inspo
@@ -89,6 +90,12 @@
 	p {
 		font-size: 1.25rem;
 		margin: 1rem 0;
+	}
+
+	.sub {
+		color: var(--txt-2);
+		font-size: 1.125rem;
+		margin: 0.5rem 0 2rem 0;
 	}
 
 	@media (max-width: 720px) {

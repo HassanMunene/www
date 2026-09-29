@@ -1,17 +1,15 @@
 <script>
-	import DiscordIcon from '~icons/ph/discord-logo';
 	import EmailIcon from '~icons/ph/envelope';
 	import CopyIcon from '~icons/ph/copy';
 	import CheckIcon from '~icons/ph/check';
 
 	let status = $state('submit ->');
 	let emailCopied = $state(false);
-	let discordCopied = $state(false);
 
 	// assembled at runtime so the address never appears in the static HTML
 	let email = $state('');
 	$effect(() => {
-		email = ['hello', 'refact0r.dev'].join('@');
+		email = ['awanzihassan6', 'gmail.com'].join('@');
 	});
 
 	const handleSubmit = async (data) => {
@@ -20,7 +18,9 @@
 		status = 'submitting...';
 		const formData = new FormData(data.currentTarget);
 		const object = Object.fromEntries(formData);
-		object.access_key = 'e2076be5-0774-40df-b59a-4faead3fa269';
+		// TODO: replace with your own web3forms access key — create one free at
+		// https://web3forms.com (the original author's key was removed)
+		object.access_key = 'YOUR_WEB3FORMS_ACCESS_KEY';
 		const json = JSON.stringify(object);
 
 		const response = await fetch('https://api.web3forms.com/submit', {
@@ -35,6 +35,8 @@
 		const result = await response.json();
 		if (result.success) {
 			status = 'message sent!';
+		} else {
+			status = 'something went wrong :(';
 		}
 	};
 
@@ -42,12 +44,6 @@
 		await navigator.clipboard.writeText(email);
 		emailCopied = true;
 		setTimeout(() => (emailCopied = false), 1000);
-	};
-
-	const copyDiscord = async () => {
-		await navigator.clipboard.writeText('refact0r');
-		discordCopied = true;
-		setTimeout(() => (discordCopied = false), 1000);
 	};
 </script>
 
@@ -61,19 +57,6 @@
 		</a>
 		<button class="copy-btn" onclick={copyEmail} aria-label="Copy email">
 			{#if emailCopied}
-				<CheckIcon />
-			{:else}
-				<CopyIcon />
-			{/if}
-		</button>
-	</div>
-	<div class="info">
-		<DiscordIcon />discord <span class="sub">-></span>
-		<a href="https://discord.com/users/508863359777505290" class="external"
-			>refact0r<span class="arrow">/></span>
-		</a>
-		<button class="copy-btn" onclick={copyDiscord} aria-label="Copy Discord username">
-			{#if discordCopied}
 				<CheckIcon />
 			{:else}
 				<CopyIcon />

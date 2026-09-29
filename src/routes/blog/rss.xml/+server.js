@@ -1,4 +1,5 @@
 import { getPosts } from '$lib/js/posts.js';
+import { site } from '$lib/js/site.js';
 
 export const prerender = true;
 
@@ -8,11 +9,11 @@ export async function GET() {
 
 	posts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-	const siteUrl = 'https://refact0r.dev'; // Replace with your actual domain
+	const siteUrl = site.url;
 	const rssContent = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
-		<title>refact0r's blog</title>
+		<title>${site.name}'s blog</title>
 		<description>posts about various topics.</description>
 		<link>${siteUrl}/blog</link>
 		<atom:link href="${siteUrl}/blog/rss.xml" rel="self" type="application/rss+xml" />
